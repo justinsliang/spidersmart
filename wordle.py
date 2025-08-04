@@ -10,14 +10,23 @@ for i in range(0, 5):
 
 
 #print game interface ****AS A FUNCTION
-printList = [["M", "E", "P", "O", "L"], 
+printList = [[" ", " ", " ", " ", " "], 
              [" ", " ", " ", " ", " "], 
              [" ", " ", " ", " ", " "], 
              [" ", " ", " ", " ", " "], 
              [" ", " ", " ", " ", " "], 
              [" ", " ", " ", " ", " "]]
 
-usedLetters = {}
+allLetters = ["A", "B", "C", "D", 
+              "E", "F", "G", "H", 
+              "I", "J", "K", "L",
+              "M", "N", "O", "P",
+              "Q", "R", "S", "T",
+              "U", "V", "W", "X",
+              "Y", "Z"]
+for i in range(0, len(allLetters)):
+    allLetters[i] = allLetters[i].lower()
+              
 sortedUsedLetters = []
 
 print("Welcome to Wordle")
@@ -34,12 +43,25 @@ while option != "0" and guess < 6:
                     outputstring += f"({printList[r][c]})"
             else:
                 outputstring += f"[{printList[r][c]}]"
-                if printList[r][c] != " ":
-                    usedLetters.add(printList[r][c])
-            sortedUsedLetters = sorted(usedLetters)
+            if printList[r][c] != " ":
+                sortedUsedLetters.append(printList[r][c])
+            sortedUsedLetters = sorted(list(set(sortedUsedLetters)))
         print(outputstring)
         outputstring = f""     
     
+    #REMOVE AFTER TESTING
+    print(wod)
+
+    print("Used Letters: ")
+    print(sortedUsedLetters)
+    
+    for i in range(0, len(sortedUsedLetters)):
+        if sortedUsedLetters[i] in allLetters:
+            allLetters.remove(sortedUsedLetters[i])
+
+    print("Unused Letters")
+    print(allLetters)
+
     print("0: quit")
     print("1: guess")
     option = input("Choose an option: ")
@@ -54,9 +76,22 @@ while option != "0" and guess < 6:
         for i in range(0, 5):
             printList[guess][i] = userinput[i]
         guess += 1
-      
 
+outputstring = f""
+for r in range(0, 6):
+    for c in range(0, 5):
+        if printList[r][c] in wodList:
+            if printList[r][c] == wodList[c]:
+                outputstring += f"{{{printList[r][c]}}}"
+            else:
+                outputstring += f"({printList[r][c]})"
+        else:
+            outputstring += f"[{printList[r][c]}]"
+        if printList[r][c] != " ":
+            sortedUsedLetters.append(printList[r][c])
+        sortedUsedLetters = sorted(list(set(sortedUsedLetters)))
+    print(outputstring)
+    outputstring = f""   
 
-
-#game logic ****AS A FUNCTION
+print("The correct word is: " + wod)
 
