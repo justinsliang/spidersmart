@@ -3,12 +3,30 @@ print("Welcome to Pokemon")
 p1deck = []
 p2deck = []
 
+class Attack:
+    def __init__(self, name, damage, critChance, uses):
+        self.name = name
+        self.damage = damage
+        self.critChance = critChance
+        self.uses = uses
+
 class Card:
-    def __init__(self, name, type, health, attacks: dict):
+    def __init__(self, name, type, health, attacks):
         self.name = name
         self.type = type
         self.health = health
         self.attacks = attacks
+
+#LIST OF POKEMON TO CHOOSE FROM
+POKEMONLIST =  [Card("Pikachu",     "ELECTRIC", 100,   [Attack("Quick Attack", 10, 1, 100), 
+                                                        Attack("Thunderbolt", 25, 4, 4), 
+                                                        Attack("Electro Ball", 40, 0.5, 2)]),
+                Card("Bulbasaur",   "GRASS",    100,   [Attack("Quick Attack", 10, 1, 100), 
+                                                        Attack("Vine Whip", 25, 4, 4), 
+                                                        Attack("Razor Leaf", 40, 0.5, 2)]),
+                Card("Squirtle",    "WATER",    100,   [Attack("Quick Attack", 10, 1, 100), 
+                                                        Attack("Water Gun", 25, 4, 4), 
+                                                        Attack("Hydro Pump", 40, 0.5, 2)])]
 
 def isWin():
     return 0
