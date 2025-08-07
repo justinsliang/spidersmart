@@ -45,12 +45,16 @@ def isWin():
         output = 3
     return output
 
-def getDamage(index: int, deck: list, attack: int):
+def getDamage(dindex: int, ddeck: list, aindex: int, adeck: list, attack: int):
     #placeholder return
-    return 10
-
-def doDamage(damage: int, index: int, deck: list):
-    #finish code, void function
+    typeMultiplier = 1
+    if adeck[aindex].type == "ELECTRIC" and ddeck[dindex].type == "GRASS":
+        typeMultiplier = 1.5
+    if adeck[aindex].type == "GRASS" and ddeck[dindex].type == "WATER":
+        typeMultiplier = 1.5
+    if adeck[aindex].type == "WATER" and ddeck[dindex].type == "ELECTRIC":
+        typeMultiplier = 1.5
+    damage = typeMultiplier * (adeck[aindex].attacks[attack].damage)
 
 print(p1deck)
 p1index = int(input("P1 choose your pokemon: "))
@@ -68,13 +72,11 @@ while isWin() == 0:
         #print the attack
         attackIndex = int(input("Enter attack number: "))
         if turn == 1:
-            turnDamage = getDamage(p1index, p1deck, attackIndex)
+            turnDamage = getDamage(p2index, p2deck, p1index, p1deck, attackIndex)
             print(f"Player 2 took {turnDamage} damage.")
-            doDamage(turnDamage, p2index, p2deck)
         if turn == 2:
-            turnDamage = getDamage(p2index, p2deck, attackIndex)
+            turnDamage = getDamage(p1index, p1deck, p2index, p2deck, attackIndex)
             print(f"Player 1 took {turnDamage} damage.")
-            doDamage(turnDamage, p1index, p1deck)
     
     if option == "2": 
         if turn == 1:
