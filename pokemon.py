@@ -29,7 +29,21 @@ POKEMONLIST =  [Card("Pikachu",     "ELECTRIC", 100,   [Attack("Quick Attack", 1
                                                         Attack("Hydro Pump", 40, 0.5, 2)])]
 
 def isWin():
-    return 0
+    output = 0
+    p1dead = 0
+    p2dead = 0
+    for i in range(0, 3):
+        if p1deck[i].health == 0:
+            p1dead += 1
+        if p2deck[i].health == 0:
+            p2dead += 1
+    if p1dead == 3:
+        output = 1
+    if p2dead == 3:
+        output = 2
+    if p1dead == 3 and p2dead == 3:
+        output = 3
+    return output
 
 def getDamage(index: int, deck: list, attack: int):
     #placeholder return
