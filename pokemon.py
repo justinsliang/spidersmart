@@ -1,3 +1,5 @@
+import random
+
 print("Welcome to Pokemon")
 
 p1deck = []
@@ -46,6 +48,8 @@ def isWin():
     return output
 
 def getDamage(dindex: int, ddeck: list, aindex: int, adeck: list, attack: int):
+    adeck[aindex].attacks[attack].uses -= 1
+
     #placeholder return
     typeMultiplier = 1
     if adeck[aindex].type == "ELECTRIC" and ddeck[dindex].type == "GRASS":
@@ -54,22 +58,60 @@ def getDamage(dindex: int, ddeck: list, aindex: int, adeck: list, attack: int):
         typeMultiplier = 1.5
     if adeck[aindex].type == "WATER" and ddeck[dindex].type == "ELECTRIC":
         typeMultiplier = 1.5
-    damage = typeMultiplier * (adeck[aindex].attacks[attack].damage)
+    
+    doCrit = random.randint(0, 9)
+    if doCrit <= adeck[aindex].attacks[attack].critChance:
+        doCrit = 2
+    else: 
+        doCrit = 1
 
-print(p1deck)
+    damage = typeMultiplier * (adeck[aindex].attacks[attack].damage) * doCrit
+    ddeck[dindex].health -= damage
+    if ddeck[dindex].health < 0:
+        ddeck[dindex].health = 0
+    return damage
+
+print("List of Pokemon:")
+for i in range(0, len(POKEMONLIST)):
+    print(f"{i} - Name: {POKEMONLIST[i].name}, Type: {POKEMONLIST[i].type}, Health: {POKEMONLIST[i].health}")
+
+for i in range(0, 3):
+    choice = int(input(f"Player 1, choose your pokemon ({i}): "))
+    p1deck.append(POKEMONLIST[choice])
+
+print("List of Pokemon:")
+for i in range(0, len(POKEMONLIST)):
+    print(f"{i} - Name: {POKEMONLIST[i].name}, Type: {POKEMONLIST[i].type}, Health: {POKEMONLIST[i].health}")
+
+for i in range(0, 3):
+    choice = int(input(f"Player 1, choose your pokemon ({i}): "))
+    p2deck.append(POKEMONLIST[choice])
+
+for i in range(0, 3):
+    print(f"{i}: {p1deck[i].name}")
 p1index = int(input("P1 choose your pokemon: "))
-print(p2deck)
+
+for i in range(0, 3):
+    print(f"{i}: {p2deck[i].name}")
 p2index = int(input("P2 choose your pokemon: "))
 turn = 1
 
 option = ""
 while isWin() == 0:
-    #print pokemon status for both players
+    print(f"Player 1 - Name: {p1deck[p1index].name}, Type: {p1deck[p1index].type}, Health: {p1deck[p1index].health}")
+    print(f"Player 2 - Name: {p2deck[p2index].name}, Type: {p2deck[p2index].type}, Health: {p2deck[p2index].health}")
+    print(f"Player {turn}, it is your turn:")
     print("1: Attack")
     print("2: Swap")
     option = input("Enter option: ")
     if option == "1":
         #print the attack
+        for i in range(0, 3):
+            if turn == 1:
+                print(f"Name: {p1deck[p1index].attacks[i].name}, Damage: {p1deck[p1index].attacks[i].damage}, Crit Chance: {p1deck[p1index].attacks[i].critChance}, Uses: {p1deck[p1index].attacks[i].uses}")
+            if turn == 2:
+                print(f"Name: {p2deck[p2index].attacks[i].name}, Damage: {p2deck[p2index].attacks[i].damage}, Crit Chance: {p2deck[p2index].attacks[i].critChance}, Uses: {p2deck[p2index].attacks[i].uses}")
+        
         attackIndex = int(input("Enter attack number: "))
         if turn == 1:
             turnDamage = getDamage(p2index, p2deck, p1index, p1deck, attackIndex)
@@ -80,10 +122,12 @@ while isWin() == 0:
     
     if option == "2": 
         if turn == 1:
-            print(p1deck)
+            for i in range(0, 3):
+                print(f"{i}: {p1deck[i].name}")
             p1index = int(input("P1 choose your pokemon: "))
         if turn == 2:
-            print(p2deck)
+            for i in range(0, 3):
+                print(f"{i}: {p2deck[i].name}")
             p2index = int(input("P2 choose your pokemon: "))
 
     if turn == 1:
