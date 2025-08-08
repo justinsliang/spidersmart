@@ -20,12 +20,12 @@ class Card:
         self.attacks = attacks
 
 #LIST OF POKEMON TO CHOOSE FROM
-POKEMONLIST =  [Card("Pikachu",     "ELECTRIC", 100,   [Attack("Quick Attack", 10, 1, 100), 
-                                                        Attack("Thunderbolt", 25, 4, 4), 
-                                                        Attack("Electro Ball", 40, 0.5, 2)]),
-                Card("Bulbasaur",   "GRASS",    100,   [Attack("Quick Attack", 10, 1, 100), 
+POKEMONLIST =  [Card("Bulbasaur",   "GRASS",    100,   [Attack("Quick Attack", 10, 1, 100), 
                                                         Attack("Vine Whip", 25, 4, 4), 
                                                         Attack("Razor Leaf", 40, 0.5, 2)]),
+                Card("Pikachu",     "ELECTRIC", 100,   [Attack("Quick Attack", 10, 1, 100), 
+                                                        Attack("Thunderbolt", 25, 4, 4), 
+                                                        Attack("Electro Ball", 40, 0.5, 2)]),
                 Card("Squirtle",    "WATER",    100,   [Attack("Quick Attack", 10, 1, 100), 
                                                         Attack("Water Gun", 25, 4, 4), 
                                                         Attack("Hydro Pump", 40, 0.5, 2)]),
@@ -44,9 +44,9 @@ POKEMONLIST =  [Card("Pikachu",     "ELECTRIC", 100,   [Attack("Quick Attack", 1
                 Card("Zekrom",      "ELECTRIC", 300,   [Attack("Quick Attack", 20, 1, 100), 
                                                         Attack("Ancient Power", 40, 4, 2), 
                                                         Attack("Thunder Fang", 80, 0.5, 1)]),
-                Card("Poliwrath",   "WATER",    150,   [Attack("Quick Attack", 10, 1, 100), 
-                                                        Attack("Belly Drum", 20, 4, 2), 
-                                                        Attack("Rain Dance", 40, 0.5, 1)])]
+                Card("Kyogre",      "WATER",    300,   [Attack("Quick Attack", 20, 1, 100), 
+                                                        Attack("Aqua Tail", 40, 4, 2), 
+                                                        Attack("Tsunami", 80, 0.5, 1)])]
 
 def isWin():
     output = 0
@@ -76,8 +76,6 @@ def getDamage(dindex: int, ddeck: list, aindex: int, adeck: list, attack: int):
         typeMultiplier = 1.5
     if adeck[aindex].type == "WATER" and ddeck[dindex].type == "ELECTRIC":
         typeMultiplier = 1.5
-
-
     
     doCrit = random.randint(0, 9)
     if doCrit <= adeck[aindex].attacks[attack].critChance:
