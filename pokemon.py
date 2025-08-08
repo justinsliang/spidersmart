@@ -28,7 +28,25 @@ POKEMONLIST =  [Card("Pikachu",     "ELECTRIC", 100,   [Attack("Quick Attack", 1
                                                         Attack("Razor Leaf", 40, 0.5, 2)]),
                 Card("Squirtle",    "WATER",    100,   [Attack("Quick Attack", 10, 1, 100), 
                                                         Attack("Water Gun", 25, 4, 4), 
-                                                        Attack("Hydro Pump", 40, 0.5, 2)])]
+                                                        Attack("Hydro Pump", 40, 0.5, 2)]),
+                Card("Beedrill",    "GRASS",    70,    [Attack("Quick Attack", 15, 1, 100), 
+                                                        Attack("Bug Bite", 30, 4, 4), 
+                                                        Attack("Drill Sting", 45, 0.5, 2)]),
+                Card("Electabuzz",  "ELECTRIC", 200,   [Attack("Quick Attack", 10, 1, 100), 
+                                                        Attack("Hyper ", 20, 4, 2), 
+                                                        Attack("Hydro Pump", 40, 0.5, 1)]),
+                Card("Poliwrath",   "WATER",    150,   [Attack("Quick Attack", 10, 1, 100), 
+                                                        Attack("Belly Drum", 20, 4, 2), 
+                                                        Attack("Rain Dance", 40, 0.5, 1)]),
+                Card("Rillaboom",   "GRASS",    300,   [Attack("Quick Attack", 20, 1, 100), 
+                                                        Attack("Bug Bite", 40, 4, 4), 
+                                                        Attack("Drill Sting", 50, 0.5, 2)]),
+                Card("Zekrom",      "ELECTRIC", 200,   [Attack("Quick Attack", 10, 1, 100), 
+                                                        Attack("Hyper ", 20, 4, 2), 
+                                                        Attack("Hydro Pump", 40, 0.5, 1)]),
+                Card("Poliwrath",   "WATER",    150,   [Attack("Quick Attack", 10, 1, 100), 
+                                                        Attack("Belly Drum", 20, 4, 2), 
+                                                        Attack("Rain Dance", 40, 0.5, 1)]),]
 
 def isWin():
     output = 0
@@ -100,6 +118,17 @@ option = ""
 while isWin() == 0:
     print(f"Player 1 - Name: {p1deck[p1index].name}, Type: {p1deck[p1index].type}, Health: {p1deck[p1index].health}")
     print(f"Player 2 - Name: {p2deck[p2index].name}, Type: {p2deck[p2index].type}, Health: {p2deck[p2index].health}")
+
+    while p1deck[p1index].health == 0:
+        for i in range(0, 3):
+            print(f"{i}: {p1deck[i].name}")
+        p1index = int(input("P1 choose your pokemon: "))
+    
+    while p2deck[p2index].health == 0:
+        for i in range(0, 3):
+            print(f"{i}: {p2deck[i].name}")
+        p2index = int(input("P2 choose your pokemon: "))
+
     print(f"Player {turn}, it is your turn:")
     print("1: Attack")
     print("2: Swap")
