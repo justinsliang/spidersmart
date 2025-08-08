@@ -39,14 +39,14 @@ POKEMONLIST =  [Card("Pikachu",     "ELECTRIC", 100,   [Attack("Quick Attack", 1
                                                         Attack("Belly Drum", 20, 4, 2), 
                                                         Attack("Rain Dance", 40, 0.5, 1)]),
                 Card("Rillaboom",   "GRASS",    300,   [Attack("Quick Attack", 20, 1, 100), 
-                                                        Attack("Bug Bite", 40, 4, 4), 
-                                                        Attack("Drill Sting", 50, 0.5, 2)]),
-                Card("Zekrom",      "ELECTRIC", 200,   [Attack("Quick Attack", 10, 1, 100), 
-                                                        Attack("Hyper ", 20, 4, 2), 
-                                                        Attack("Hydro Pump", 40, 0.5, 1)]),
+                                                        Attack("Bug Bite", 40, 4, 2), 
+                                                        Attack("Drill Sting", 80, 0.5, 1)]),
+                Card("Zekrom",      "ELECTRIC", 300,   [Attack("Quick Attack", 20, 1, 100), 
+                                                        Attack("Ancient Power", 40, 4, 2), 
+                                                        Attack("Thunder Fang", 80, 0.5, 1)]),
                 Card("Poliwrath",   "WATER",    150,   [Attack("Quick Attack", 10, 1, 100), 
                                                         Attack("Belly Drum", 20, 4, 2), 
-                                                        Attack("Rain Dance", 40, 0.5, 1)]),]
+                                                        Attack("Rain Dance", 40, 0.5, 1)])]
 
 def isWin():
     output = 0
@@ -76,6 +76,8 @@ def getDamage(dindex: int, ddeck: list, aindex: int, adeck: list, attack: int):
         typeMultiplier = 1.5
     if adeck[aindex].type == "WATER" and ddeck[dindex].type == "ELECTRIC":
         typeMultiplier = 1.5
+
+
     
     doCrit = random.randint(0, 9)
     if doCrit <= adeck[aindex].attacks[attack].critChance:
@@ -102,7 +104,7 @@ for i in range(0, len(POKEMONLIST)):
     print(f"{i} - Name: {POKEMONLIST[i].name}, Type: {POKEMONLIST[i].type}, Health: {POKEMONLIST[i].health}")
 
 for i in range(0, 3):
-    choice = int(input(f"Player 1, choose your pokemon ({i}): "))
+    choice = int(input(f"Player 2, choose your pokemon ({i}): "))
     p2deck.append(POKEMONLIST[choice])
 
 for i in range(0, 3):
